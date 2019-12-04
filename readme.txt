@@ -1,0 +1,1 @@
+I added an page for adding a task, formatted the tasks page and added the ability to give tasks a title and a date
