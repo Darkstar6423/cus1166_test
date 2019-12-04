@@ -1,0 +1,85 @@
+{% extends "menu.html" %}
+
+{% block main_content %}
+
+
+<div class="page-content page-container" id="page-content">
+    <h4 class="card-title">CUS1166 - Todo List</h4>
+    <div class="dropdown">
+    <button class="dropbtn">Sort By</button>
+     <div class="dropdown-content">
+    <a href="/todolist/0/">Title</a>
+    <a href="/todolist/1/">Description</a>
+    <a href="/todolist/2/">Date</a>
+    <a href="/todolist/3/">Completion Status</a>
+  </div>
+</div>
+    </br><a class="add btn btn-primary font-weight-bold todo-list-add-btn", href="/new_todolist">Add a task</a>
+
+
+
+
+                       <!-- Show current tasks if avaiblae -->
+                        <link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/cus1166_custom.css')}}">
+
+
+
+
+
+                             {% for task in todo_list %}
+                                <div class="padding">
+                                <div class="add-items d-flex">
+                                 <div class="list-wrapper">
+                                <div class="row container d-flex justify-content-center">
+                                <div class="col-lg-12">
+                                <div class="card px-3">
+                                 <div class="card-body">
+
+
+                                    <div class="task_item" id="task_item">
+                                     <h4>{{task.task_title}}</h4>
+                                        <h6 class="small">{{task.task_date}}</h6>
+                                      <label class="form-check-label">
+                                          {% if 'done' == task.task_status %}
+                                            {{task.task_desc}} <br/><span class="badge badge-success">{{task.task_status}}</span>
+                                          {% elif 'doing' == task.task_status %}
+                                            {{task.task_desc}} <br/><span class="badge badge-warning">{{task.task_status}}</span>
+                                          {% elif 'todo' == task.task_status %}
+                                             {{task.task_desc}} <br/><span class="badge badge-danger">{{task.task_status}}</span>
+                                          {% elif 'overdue' == task.task_status %}
+                                             {{task.task_desc}} <br/><span class="badge badge-danger">{{task.task_status}}</span>
+                                          {% endif %}
+
+
+                                            <i class="input-helper"></i>
+                                      </label>
+                                    </div>
+                                                                     {% if 'done' == task.task_status%}
+                                    <li class="completed">
+                                {% else %}
+                                    <li>
+                                {% endif %}
+                                    <a href="{{url_for('main.edit_task',task_id=task.task_id)}}">
+                                         <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{{url_for('main.remove_task',task_id=task.task_id)}}" class="remove"><i class="fas fa-times"></i></a>
+                              </li>
+                                 </div>
+                                </div>
+                                </div>
+                                </div>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                             {% endfor %}
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
