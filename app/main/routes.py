@@ -26,6 +26,11 @@ def todolist(sortby):
     else:
         todo_list = Task.query.order_by(Task.task_id)
 
+    date = datetime.now().date()
+    for i in todo_list:
+        task_date = datetime.strptime(i.task_date, "%Y-%m-%d").date()
+        if task_date < date and i.task_status != "done":
+            i.task_status = "overdue"
 
 
     return render_template("main/todolist.html",todo_list = todo_list)
@@ -58,6 +63,10 @@ def edit_task(task_id):
         current_task.task_desc = form.task_desc.data
         current_task.task_date = request.form['date']
         current_task.task_status = form.task_status_completed.data
+        current_task.task_duration = form.task_duration.data
+        current_task.task_time = form.task_time.data
+        current_task.task_location = form.task_location.data
+        current_task.task_CName = form.task_CName.data
         db.session.commit()
         # After editing, redirect to the view page.
         return redirect(url_for('main.todolist', sortby=0))
@@ -70,14 +79,18 @@ def edit_task(task_id):
     form.task_desc.data = current_task.task_desc
     form.task_status_completed.data = current_task.task_status
     form.task_date = current_task.task_date
+    form.task_CName.data = current_task.task_Cname
+    form.task_location.data = current_task.task_address
+    form.task_time.data = current_task.task_time
+    form.task_duration.data = current_task.task_duration
+
     return render_template("main/todolist_edit_view.html",form=form, task_id = task_id, sortby=0)
 
 
 @bp.route('/new_todolist', methods=['GET','POST'])
 def new_task():
     form = TaskForm()
-
-
+    print(form.validate_on_submit())
     if form.validate_on_submit():
         # Get the data from the form, and add it to the database.
         new_task = Task()
@@ -85,6 +98,10 @@ def new_task():
         new_task.task_desc = form.task_desc.data
         new_task.task_status = form.task_status_completed.data
         new_task.task_date = request.form['date']
+        new_task.task_time = form.task_time.data
+        new_task.task_duration = form.task_duration.data
+        new_task.task_address = form.task_location.data
+        new_task.task_Cname = form.task_CName.data
         db.session.add(new_task)
         db.session.commit()
         todo_list = db.session.query(Task).all()

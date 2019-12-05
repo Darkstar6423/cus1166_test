@@ -49,7 +49,10 @@
                                           {% elif 'overdue' == task.task_status %}
                                              {{task.task_desc}} <br/><span class="badge badge-danger">{{task.task_status}}</span>
                                           {% endif %}
-
+                                            <p>{{task.task_time}}</p>
+                                            <p>{{task.task_duration}}</p>
+                                            <p>{{task.task_location}}</p>
+                                            <p>{{task.task_CName}}</p>
 
                                             <i class="input-helper"></i>
                                       </label>

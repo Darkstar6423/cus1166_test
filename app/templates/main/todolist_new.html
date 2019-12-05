@@ -13,10 +13,13 @@
                         <br class="add-items d-flex">
                             {{ form.csrf_token }}
                             {{form.task_title(class_='form-control todo-list-input', placeholder='The Title')}}
-                            {{ form.task_desc(class_='form-control todo-list-input', placeholder='What do you need to do today?')}}
-                            <input type="date", name="date">
+                            {{form.task_desc(class_='form-control todo-list-input', placeholder='What do you need to do today?')}}
+                            {{form.task_time(class_='form-control todo-list-input', placeholder='What time does this task take place')}}
+                            {{form.task_duration(class_='form-control todo-list-input', placeholder='How long will it take')}}
+                            {{form.task_location(class_='form-control todo-list-input', placeholder='Where will this be taking place')}}
+                            {{form.task_CName(class_='form-control todo-list-input', placeholder='who is the customer')}}
+                            <input type="date", name="date"></br>
                             {{ form.task_status_completed }}
-
                         </br><button class="add btn btn-primary font-weight-bold todo-list-add-btn">Save Task</button>
                         </form>
                        </div>

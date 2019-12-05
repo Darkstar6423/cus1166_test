@@ -14,6 +14,10 @@
                                 {{ form.csrf_token }}
                                 {{form.task_title}}
                                 {{ form.task_desc(class_='form-control todo-list-input', placeholder='What do you need to do today?')}}
+                                {{form.task_time(class_='form-control todo-list-input',placeholder='What time does this task take place')}}
+                                {{form.task_duration(class_='form-control todo-list-input',placeholder='How long will it take')}}
+                                {{form.task_location(class_='form-control todo-list-input',placeholder='Where will this be taking place')}}
+                                {{form.task_CName(class_='form-control todo-list-input',placeholder='who is the customer')}}
                                 <input type="date", name="date", value={{form.task_date}}>
                                 {{ form.task_status_completed }}
                                 <button class="add btn btn-primary font-weight-bold todo-list-add-btn">Save Changes</button>
